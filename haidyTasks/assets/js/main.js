@@ -1,4 +1,5 @@
 $("#responsive-box").dxResponsiveBox({
+    height: 200,
     rows: [{
             ratio: 2
         },
