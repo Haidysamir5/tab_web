@@ -1,6 +1,6 @@
 var products = [{
     id: "1_1_1",
-    text: "Video Players",
+    text: "البيانات",
     items: [{
         id: "1_1_1_1",
         text: "HD Video Player",
