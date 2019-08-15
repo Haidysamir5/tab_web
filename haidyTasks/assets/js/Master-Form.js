@@ -19,6 +19,9 @@ class Source {
 
     initToolPermi(toolEle, toolPer) {
         var $this = this;
+        //initaite basic icons
+        toolPer["exportxlsx"] = "1";
+        toolPer["doc"] = "1";
         var toolbarItems = []
         //show action btn depened on logged user permissions
         for (const key in toolPer) {
