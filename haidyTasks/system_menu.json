@@ -1,7 +1,7 @@
 [{
-        "form_name": "البيانات الاساسية",
+        "form_name": "Basic",
         "title": "البيانات الاساسية",
-        "url": "",
+        "url": "/BusinessForms/formTest.html",
         "permission": {
             "Read": "0",
             "Print": "1",
@@ -14,7 +14,7 @@
         }
     },
     {
-        "form_name": "التحكم",
+        "form_name": "Controls",
         "title": "التحكم",
         "permission": {
             "Read": "0",

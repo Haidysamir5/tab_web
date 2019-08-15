@@ -79,15 +79,15 @@ class Source {
                 width: 300,
                 onItemRendered: (e) => {
                     if (e.itemData.url) {
-                        addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+                        addPageTemp(e.itemData.url, e.itemData.text, e.itemData.form_name);
                     }
                 },
                 onItemClick: (e) => {
                     if (e.itemData.url) {
-                        // addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+                        window.location.hash = `/${e.itemData.form_name}`;
+                    } else {
+                        window.location.hash = `/`;
                     }
-                    console.log(e.itemData.text);
-                    window.location.hash = "/basic";
                 }
             })
         } else {
@@ -97,11 +97,16 @@ class Source {
                 rtlEnabled: true,
                 onItemRendered: (e) => {
                     if (e.itemData.url) {
-                        addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+                        addPageTemp(e.itemData.url, e.itemData.text, e.itemData.form_name);
                     }
                 },
-                // onItemClick: eval(`$this.${keyLowerCase}Item`)
-
+                onItemClick: (e) => {
+                    if (e.itemData.url) {
+                        window.location.hash = `/${e.itemData.form_name}`;
+                    } else {
+                        window.location.hash = `/`;
+                    }
+                }
             })
         }
 
@@ -121,9 +126,11 @@ class Source {
         $.ajax({
             url: url,
             success: (response) => {
+                console.log(response);
                 $this.initToolPermi($("#master-toolbar"), $this.permissions);
-                $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
-                $this.initMasterMenu($("#master-menu"), system_menu, "menu");
+                $this.initMasterMenu($("#master-sidebar"), response, "tree");
+                $this.initMasterMenu($("#master-menu"), response, "menu");
+                router();
             },
             error: () => {
 
