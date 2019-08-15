@@ -59,7 +59,7 @@ class Source {
 
         $(toolEle).dxToolbar({
             items: toolbarItems,
-            // rtlEnabled: true,
+            rtlEnabled: true,
         });
     }
 
@@ -73,12 +73,11 @@ class Source {
 
         }
 
-        debugger;
 
         if (type == "tree") {
             $(toolEle).dxTreeView({
                 items: Menu,
-                // rtlEnabled: true,
+                rtlEnabled: true,
                 width: 300,
                 // onItemClick: eval(`$this.${keyLowerCase}Item`)
 
@@ -87,8 +86,7 @@ class Source {
             // add header menu items
             $(toolEle).dxMenu({
                 items: Menu,
-                // rtlEnabled: true,
-                width: 300,
+                rtlEnabled: true,
                 // onItemClick: eval(`$this.${keyLowerCase}Item`)
 
             })
@@ -110,7 +108,7 @@ class Source {
         $.ajax({
             // url: url,
             success: () => {
-                $this.initToolPermi($("#master-toolbar"), $this.permissions);
+                $this.initToolPermi($("#master-toolbar"), system_menu["permission"]);
                 $this.initMasterMenu($("#master-sidebar"), products, "tree")
                 $this.initMasterMenu($("#master-menu"), products, "menu")
             },
@@ -124,8 +122,8 @@ class Source {
 
     init() {
         var $this = this;
-        $this.initToolPermi($("#master-toolbar"), $this.permissions);
-        $this.initMasterMenu($("#master-sidebar"), products, "tree")
+        $this.initToolPermi($("#master-toolbar"), system_menu[0]["permission"]);
+        $this.initMasterMenu($("#master-sidebar"), products, "tree");
         $this.initMasterMenu($("#master-menu"), products, "menu")
 
     }

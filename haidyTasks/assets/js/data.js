@@ -1,6 +1,84 @@
+var system_menu = [{
+    "form_name": "Form1",
+    "title": "tilte1",
+    "url": "",
+    "permission": {
+        "Read": "0",
+        "Print": "1",
+        "Delete": "1",
+        "back": "1",
+        "Next": "1",
+        "insert": "0",
+        "Save": "1",
+        "Edit": "1",
+    },
+    "childs": [],
+    "form_data": [{
+            "form_name": "البيانات الاساسية",
+            "data": []
+        },
+        {
+            "form_name": "التحكم",
+            "data": [{
+                    "form_name": "تفضيلات",
+                }, {
+                    "form_name": "الالوان",
+                }, {
+                    "form_name": "تغيير الفرع "
+                },
+                {
+                    "form_name": "الشاشات النشطة"
+                },
+                {
+                    "form_name": "الشاشات الحديثة",
+                    "data": [{
+                        "form_name": "شاشة1"
+                    }]
+
+                }
+            ]
+
+        }
+    ]
+}];
+
 var products = [{
+        text: "البيانات الاساسية",
+    },
+
+    {
+        text: "التحكم",
+        items: [{
+                text: "تفضيلات",
+            }, {
+                text: "الالوان",
+            }, {
+                text: "تغيير الفرع "
+            },
+            {
+                text: "الشاشات النشطة"
+            },
+            {
+                text: "الشاشات الحديثة",
+                items: [{
+                    text: "شاشة1"
+                }]
+
+            }
+        ]
+
+    },
+    {
+        text: "الحركات المالية"
+    },
+    {
+        text: "الحسابات العامة"
+    }
+
+];
+var prod = [{
     id: "1_1_1",
-    text: "البيانات",
+    text: "البيانات الاساسية",
     items: [{
         id: "1_1_1_1",
         text: "HD Video Player",
