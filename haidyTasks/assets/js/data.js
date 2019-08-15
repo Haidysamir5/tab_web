@@ -42,6 +42,13 @@ var system_menu = [{
     ]
 }];
 
+var strjs = JSON.stringify(system_menu[0].form_data);
+debugger;
+strjs = JSON.parse(strjs.replace(/form_name/g, "text").replace(/data/g, "items"));
+console.log(strjs)
+
+
+
 var products = [{
         text: "البيانات الاساسية",
     },
