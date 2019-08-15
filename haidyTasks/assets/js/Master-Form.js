@@ -77,6 +77,7 @@ class Source {
         for (const key in Menu) {
 
 
+
         }
 
 
@@ -86,7 +87,11 @@ class Source {
                 rtlEnabled: true,
                 width: 300,
                 onItemClick: (e) => {
-                    console.log(e.component);
+                    if (e.itemData.url) {
+                        // addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+
+                    }
+                    console.log(e.itemData.text);
                     window.location.hash = "/basic";
                 }
 
