@@ -115,11 +115,12 @@ class Source {
     initRequest(url) {
         var $this = this;
         $.ajax({
-            // url: url,
-            success: () => {
-                $this.initToolPermi($("#master-toolbar"), system_menu["permission"]);
-                $this.initMasterMenu($("#master-sidebar"), products, "tree")
-                $this.initMasterMenu($("#master-menu"), products, "menu")
+            url: url,
+            success: (response) => {
+                console.log(response)
+                $this.initToolPermi($("#master-toolbar"), $this.permissions);
+                $this.initMasterMenu($("#master-sidebar"), products, "tree");
+                $this.initMasterMenu($("#master-menu"), products, "menu");
             },
             error: () => {
 
@@ -131,6 +132,7 @@ class Source {
 
     init() {
         var $this = this;
+        $this.initRequest("system_menu.json");
         $this.initToolPermi($("#master-toolbar"), $this.permissions);
         $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
         $this.initMasterMenu($("#master-menu"), system_menu, "menu");
