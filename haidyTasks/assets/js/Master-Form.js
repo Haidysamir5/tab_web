@@ -119,8 +119,8 @@ class Source {
             success: (response) => {
                 console.log(response)
                 $this.initToolPermi($("#master-toolbar"), $this.permissions);
-                $this.initMasterMenu($("#master-sidebar"), products, "tree");
-                $this.initMasterMenu($("#master-menu"), products, "menu");
+                $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
+                $this.initMasterMenu($("#master-menu"), system_menu, "menu");
             },
             error: () => {
 
@@ -133,11 +133,6 @@ class Source {
     init() {
         var $this = this;
         $this.initRequest("system_menu.json");
-        $this.initToolPermi($("#master-toolbar"), $this.permissions);
-        $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
-        $this.initMasterMenu($("#master-menu"), system_menu, "menu");
-
-
 
     }
 
