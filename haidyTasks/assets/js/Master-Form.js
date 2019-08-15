@@ -69,38 +69,37 @@ class Source {
     //form system menu data
     initMasterMenu(toolEle, Menu, type) {
         var $this = this;
-        // var menuData = [];
         //change property names to the devexpress accepted propreties name
         var menuData = JSON.stringify(Menu);
         menuData = JSON.parse(menuData.replace(/title/g, "text").replace(/childs/g, "items"));
-
-        for (const key in Menu) {
-
-
-
-        }
-
-
         if (type == "tree") {
             $(toolEle).dxTreeView({
                 items: menuData,
                 rtlEnabled: true,
                 width: 300,
+                onItemRendered: (e) => {
+                    if (e.itemData.url) {
+                        addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+                    }
+                },
                 onItemClick: (e) => {
                     if (e.itemData.url) {
                         // addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
-
                     }
                     console.log(e.itemData.text);
                     window.location.hash = "/basic";
                 }
-
             })
         } else {
             // add header menu items
             $(toolEle).dxMenu({
                 items: menuData,
                 rtlEnabled: true,
+                onItemRendered: (e) => {
+                    if (e.itemData.url) {
+                        addPageTempalte(e.itemData.url, e.itemData.title, e.itemData.form_name);
+                    }
+                },
                 // onItemClick: eval(`$this.${keyLowerCase}Item`)
 
             })
@@ -122,7 +121,6 @@ class Source {
         $.ajax({
             url: url,
             success: (response) => {
-                console.log(response)
                 $this.initToolPermi($("#master-toolbar"), $this.permissions);
                 $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
                 $this.initMasterMenu($("#master-menu"), system_menu, "menu");
