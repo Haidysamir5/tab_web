@@ -69,7 +69,7 @@ class Source {
         // var menuData = [];
         //change property names to the devexpress accepted propreties name
         var menuData = JSON.stringify(Menu);
-        menuData = JSON.parse(menuData.replace(/form_name/g, "text").replace(/data/g, "items"));
+        menuData = JSON.parse(menuData.replace(/title/g, "text").replace(/childs/g, "items"));
 
         for (const key in Menu) {
 
@@ -83,7 +83,7 @@ class Source {
                 rtlEnabled: true,
                 width: 300,
                 onItemClick: (e) => {
-                    console.log(e.component)
+                    console.log(e.component);
                     window.location.hash = "/basic";
                 }
 
@@ -128,9 +128,9 @@ class Source {
 
     init() {
         var $this = this;
-        $this.initToolPermi($("#master-toolbar"), system_menu[0]["permission"]);
-        $this.initMasterMenu($("#master-sidebar"), system_menu[0].form_data, "tree");
-        $this.initMasterMenu($("#master-menu"), system_menu[0].form_data, "menu");
+        $this.initToolPermi($("#master-toolbar"), $this.permissions);
+        $this.initMasterMenu($("#master-sidebar"), system_menu, "tree");
+        $this.initMasterMenu($("#master-menu"), system_menu, "menu");
 
 
 

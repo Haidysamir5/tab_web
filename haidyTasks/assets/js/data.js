@@ -1,46 +1,59 @@
 var system_menu = [{
-    "form_name": "Form1",
-    "title": "tilte1",
-    "url": "",
-    "permission": {
-        "Read": "0",
-        "Print": "1",
-        "Delete": "1",
-        "back": "1",
-        "Next": "1",
-        "insert": "0",
-        "Save": "1",
-        "Edit": "1",
-    },
-    "childs": [],
-    "form_data": [{
-            "form_name": "البيانات الاساسية",
-            "data": [],
+        "form_name": "البيانات الاساسية",
+        "title": "البيانات الاساسية",
+        "url": "",
+        "permission": {
+            "Read": "0",
+            "Print": "1",
+            "Delete": "1",
+            "back": "1",
+            "Next": "1",
+            "insert": "0",
+            "Save": "1",
+            "Edit": "1",
         },
-        {
-            "form_name": "التحكم",
-            "data": [{
-                    "form_name": "تفضيلات",
-                }, {
-                    "form_name": "الالوان",
-                }, {
-                    "form_name": "تغيير الفرع "
-                },
-                {
-                    "form_name": "الشاشات النشطة"
-                },
-                {
-                    "form_name": "الشاشات الحديثة",
-                    "data": [{
-                        "form_name": "شاشة1"
-                    }]
 
-                }
-            ]
+    },
+    {
+        "form_name": "التحكم",
+        "title": "التحكم",
+        "permission": {
+            "Read": "0",
+            "Print": "1",
+            "Delete": "1",
+            "back": "1",
+            "Next": "1",
+            "insert": "0",
+            "Save": "1",
+            "Edit": "1",
+        },
+        "childs": [{
+                "form_name": "تفضيلات",
+                "title": "تفضيلات"
+            }, {
+                "form_name": "الالوان",
+                "title": "الالوان"
+            }, {
+                "form_name": "تغيير الفرع ",
+                "title": "تغيير الفرع ",
+            },
+            {
+                "form_name": "الشاشات النشطة",
+                "title": "الشاشات النشطة"
+            },
+            {
+                "form_name": "الشاشات الحديثة",
+                "title": "الشاشات الحديثة",
+                "childs": [{
+                    "form_name": "شاشة1",
+                    "title": "شاشة1"
+                }]
 
-        }
-    ]
-}];
+            }
+        ]
+
+    }
+];
 
 
 
