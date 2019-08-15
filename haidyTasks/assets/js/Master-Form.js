@@ -66,7 +66,10 @@ class Source {
     //form system menu data
     initMasterMenu(toolEle, Menu, type) {
         var $this = this;
-        var menuData = [];
+        // var menuData = [];
+        //change property names to the devexpress accepted propreties name
+        var menuData = JSON.stringify(Menu);
+        menuData = JSON.parse(menuData.replace(/form_name/g, "text").replace(/data/g, "items"));
 
         for (const key in Menu) {
 
@@ -76,16 +79,19 @@ class Source {
 
         if (type == "tree") {
             $(toolEle).dxTreeView({
-                items: Menu,
+                items: menuData,
                 rtlEnabled: true,
                 width: 300,
-                // onItemClick: eval(`$this.${keyLowerCase}Item`)
+                onItemClick: (e) => {
+                    console.log(e.component)
+                    window.location.hash = "/basic";
+                }
 
             })
         } else {
             // add header menu items
             $(toolEle).dxMenu({
-                items: Menu,
+                items: menuData,
                 rtlEnabled: true,
                 // onItemClick: eval(`$this.${keyLowerCase}Item`)
 
@@ -123,8 +129,10 @@ class Source {
     init() {
         var $this = this;
         $this.initToolPermi($("#master-toolbar"), system_menu[0]["permission"]);
-        $this.initMasterMenu($("#master-sidebar"), products, "tree");
-        $this.initMasterMenu($("#master-menu"), products, "menu")
+        $this.initMasterMenu($("#master-sidebar"), system_menu[0].form_data, "tree");
+        $this.initMasterMenu($("#master-menu"), system_menu[0].form_data, "menu");
+
+
 
     }
 
