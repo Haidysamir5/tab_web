@@ -3,63 +3,72 @@ class Source {
     // this.site_url = hostName;
     this.toolbarvar = [];
     this.permissions = {
-      Read: "0",
+      Read: "1",
       Print: "1",
       Delete: "1",
       back: "1",
       Next: "1",
-      insert: "0",
+      insert: "1",
       Save: "1",
-      Edit: "1"
+      Edit: "1",
+      exportxlsx: "1",
+      doc: "1"
+
     };
+
+    this.sidebar = "";
+    this.toolbar = "";
+    this.headerMenu = "";
   }
 
   initToolPermi(toolEle, toolPer) {
     var $this = this;
     //initaite basic icons
-    toolPer["exportxlsx"] = "1";
-    toolPer["doc"] = "1";
     var toolbarItems = [];
+    var disabed = true;
     //show action btn depened on logged user permissions
     for (const key in toolPer) {
-      if (toolPer[key] == "1") {
-        var keyLowerCase = key.toLocaleLowerCase();
-        var icon = "";
-        var disabed = false;
-        //get the icon of the permission
-        switch (keyLowerCase) {
-          case "delete":
-            icon = "trash";
-            break;
-          case "next":
-            icon = "chevronnext";
-            break;
-          default:
-            icon = keyLowerCase;
-            break;
-        }
-
-        //handle tool status depend on permissions
-        // if()
-
-        //form tool items
-        var toolbarItem = {
-          location: "before",
-          widget: "dxButton",
-          disabled: disabed,
-          options: {
-            icon: icon
-          },
-          onClick: eval(`$this.${keyLowerCase}Form`)
-        };
-        toolbarItems.push(toolbarItem);
+      var keyLowerCase = key.toLocaleLowerCase();
+      var icon = "";
+      //disable or enable 
+      if (toolPer[key] == "1") disabed = false;
+      else disabed = true;
+      //get the icon of the permission
+      switch (keyLowerCase) {
+        case "delete":
+          icon = "trash";
+          break;
+        case "next":
+          icon = "chevronnext";
+          break;
+        default:
+          icon = keyLowerCase;
+          break;
       }
+
+      //handle tool status depend on permissions
+      // if()
+
+      //form tool items
+      var toolbarItem = {
+        location: "before",
+        widget: "dxButton",
+        disabled: disabed,
+        options: {
+          icon: icon
+        },
+        onClick: eval(`$this.${keyLowerCase}Form`)
+      };
+      toolbarItems.push(toolbarItem);
+
     }
 
-    $(toolEle).dxToolbar({
+    $this.toolbar = $(toolEle).dxToolbar({
       items: toolbarItems,
       rtlEnabled: true
-    });
+    }).dxToolbar("option");
+
+    // console.log($this.toolbar.items);
   }
 
   //form system menu data
@@ -71,23 +80,30 @@ class Source {
       menuData.replace(/title/g, "text").replace(/childs/g, "items")
     );
     if (type == "tree") {
-      $(toolEle).dxTreeView({
+      $this.sidebar = $(toolEle).dxTreeView({
         items: menuData,
         rtlEnabled: true,
         width: 300,
+        activeStateEnabled: true,
         onItemRendered: e => {
+          e.itemData.id = e.itemData.form_name;
           if (e.itemData.url) {
             addPageTemp(e.itemData.url, e.itemData.text, e.itemData.form_name);
           }
+          console.log(e.itemData);
         },
         onItemClick: e => {
+          if (e.itemData.permission)
+            $this.initToolPermi($("#master-toolbar"), e.itemData.permission);
+
           if (e.itemData.url) {
             window.location.hash = `/${e.itemData.form_name}`;
           } else {
             window.location.hash = `/`;
           }
         }
-      });
+      }).dxTreeView("instance");
+      // console.log();
     } else {
       // add header menu items
       $(toolEle).dxMenu({
@@ -107,6 +123,11 @@ class Source {
         }
       });
     }
+    debugger;
+    // $this.sidebar.selectItem("Basic");
+
+    $this.sidebar.selectItem(window.location.hash.slice(2));
+
   }
 
   //handle save  form action
@@ -123,10 +144,9 @@ class Source {
     $.ajax({
       url: url,
       success: response => {
-        console.log(response);
-        $this.initToolPermi($("#master-toolbar"), $this.permissions);
         $this.initMasterMenu($("#master-sidebar"), response, "tree");
         $this.initMasterMenu($("#master-menu"), response, "menu");
+        $this.initToolPermi($("#master-toolbar"), $this.permissions);
         router();
       },
       error: () => {}
